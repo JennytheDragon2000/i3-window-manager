@@ -156,61 +156,36 @@ bindsym $mod+Up resize grow height 10 px or 10 ppt
 bindsym $mod+Down resize shrink height 10 px or 10 ppt
 bindsym $mod+Right resize grow width 10 px or 10 ppt
 
-#exec_always feh --bg-fill $HOME/Pictures/fog.jpg
 exec_always nitrogen --restore &
-#exec_always systemctl --user restart pipewire pipewire-pulse
 exec --no-startup-id picom -b
-# exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-# exec --no-startup-id compton -b
 exec --no-startup-id sxhkd
 # exec --no-startup-id i3-msg "workspace 9;"
 # exec "/opt/Qv2ray-v2.7.0-linux-x64.AppImage; i3-msg workspace 1"
 # exec --no-startup-id i3-msg "workspace 1;"
 
-
-#exec systemctl --user restart pipewire pipewire-pulse
-# bindsym $mod+a exec systemctl --user restart pipewire pipewire-pulse
-
-
 default_floating_border pixel 1
-# workspace_layout tabbed
 for_window [title="*"] border none
 # Hide window titles
 for_window [class=".*"] border pixel 4
 client.focused            #FFFF00 #FFFF00 #FFFF00 #FFFF00 
 
-# bindsym $mod+space exec "rofi -show drun"
 bindsym $mod+space floating toggle
-
 bindsym $mod+period exec "rofimoji"
 
 exec_always  --no-startup-id python ~/.config/i3/i3-alternating-layout/alternating_layouts.py
-# exec_always setxkbmap -option ctrl:nocaps
 # exec_always keyd-application-mapper -d
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec  emacs --daemon 
 bindsym $mod+shift+x exec betterlockscreen -l dim
 #Screenshot
-# bindsym $mod+shift+s exec maim -s | xclip -selection clipboard -t image/png
-# bindsym $mod+shift+s exec flameshot gui
 bindsym XF86MonBrightnessUp exec --no-startup-id light -A 1 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id light -U 1 # decrease screen brightness
 exec_always copyq --start-server 
-# copy pictures folder things to clipboard
 exec_always "nohup python3 ~/scripts/picToClipboard.py &"
-# bindsym $mod+b  exec librewolf
 bindsym $mod+t exec --no-startup-id pkill picom || picom -b
-# bindsym $mod+r exec kitty --class ranger -e ranger
-
-# bindsym $mod+c exec ~/scripts/rofi-config-menu.sh
-
 bindsym $mod+Shift+a exec /home/srinath/scripts/ocr-with-delay.sh
-# bindsym $mod+p exec rofi -show drun
-
-# Toggle picom
 bindsym $mod+Shift+t exec --no-startup-id pkill picom || picom -b
 
-#toggle polybar
 set $polybar-toggle ~/.config/polybar/polybar-toggle.sh
 bindsym $mod+Shift+b exec $polybar-toggle
 
@@ -232,12 +207,12 @@ bindsym Mod1+Shift+Tab workspace prev
 # for_window [title="lf" class="kitty"] floating enable
 
 # for_window [title="lf" class="kitty"] floating enable, resize set 800px 600px, move position centerm; move scratchpad
-bindsym Mod1+e [title="lf"] scratchpad show
+bindsym Mod1+e [title="lf" class="kitty"] scratchpad show
 bindsym $mod+e exec kitty -e lf
-for_window [title="lf"] floating enable
-for_window [title="lf"] resize set 800px 600px
-for_window [title="lf"] move scratchpad
-for_window [title="lf"] border pixel 5
+for_window [title="lf" class="kitty"] floating enable
+for_window [title="lf" class="kitty"] resize set 800px 600px
+for_window [title="lf" class="kitty"] move scratchpad
+for_window [title="lf" class="kitty"] border pixel 5
 
 
 # bindsym Mod1+e [instance="file-manager"] scratchpad show; 
