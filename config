@@ -14,7 +14,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+# floating_modifier $mod
+floating_modifier Mod1
 
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
@@ -162,8 +163,8 @@ exec --no-startup-id picom -b
 # exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 # exec --no-startup-id compton -b
 exec --no-startup-id sxhkd
-exec --no-startup-id i3-msg "workspace 9;"
-exec "/opt/Qv2ray-v2.7.0-linux-x64.AppImage; i3-msg workspace 1"
+# exec --no-startup-id i3-msg "workspace 9;"
+# exec "/opt/Qv2ray-v2.7.0-linux-x64.AppImage; i3-msg workspace 1"
 # exec --no-startup-id i3-msg "workspace 1;"
 
 
@@ -225,22 +226,31 @@ bindsym $mod+Tab workspace back_and_forth
 bindsym Mod1+Tab workspace next
 bindsym Mod1+Shift+Tab workspace prev
 
-# bindsym Mod1+h workspace prev
-# bindsym Mod1+j workspace back_and_forth
-# bindsym Mod1+k workspace back_and_forth
-# bindsym Mod1+l workspace next
-
-
 # Define the LibreWolf scratchpad window
 # for_window [title="LibreWolf"] scratchpad enable, move scratchpad
 
-# for_window [title="lf"] floating enable
-for_window [title="lf" class="kitty"] floating enable
+# for_window [title="lf" class="kitty"] floating enable
+
+# for_window [title="lf" class="kitty"] floating enable, resize set 800px 600px, move position centerm; move scratchpad
+bindsym Mod1+e [title="lf"] scratchpad show
+bindsym $mod+e exec kitty -e lf
+for_window [title="lf"] floating enable
+for_window [title="lf"] resize set 800px 600px
+for_window [title="lf"] move scratchpad
+for_window [title="lf"] border pixel 5
+
+
+# bindsym Mod1+e [instance="file-manager"] scratchpad show; 
+# [instance="file-manager"] move position center
+
+# Show or hide the scratchpad window with the title "lf" and class "kitty"
+# bindsym $mod+e [title="lf" class="kitty"] scratchpad show
+
 
 # Bind a keyboard shortcut to show/hide the LibreWolf scratchpad window
 exec --no-startup-id export PDF_VIEWER=zathura
 exec --no-startup-id wal -R 
-
+assign [class="librewolf-default"] 1
 set $debug_mode 1
 
 
