@@ -20,7 +20,7 @@ floating_modifier Mod1
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec kitty
-bindsym Mod1+Return exec kitty
+# bindsym Mod1+Return exec kitty
 
 # kill focused window
 bindsym $mod+q kill
@@ -64,7 +64,6 @@ bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
-bindsym Mod1+m fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -72,7 +71,6 @@ bindsym Mod1+m fullscreen toggle
 bindsym $mod+w layout toggle tabbed split 
 # bindsym $mod+t layout tabbed
 # bindsym $mod+e exec "kitty lf"
-bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+f focus mode_toggle
@@ -107,19 +105,6 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
-
-
-bindsym Mod1+1 workspace number $ws1
-bindsym Mod1+2 workspace number $ws2
-bindsym Mod1+3 workspace number $ws3
-bindsym Mod1+4 workspace number $ws4
-bindsym Mod1+5 workspace number $ws5
-bindsym Mod1+6 workspace number $ws6
-bindsym Mod1+7 workspace number $ws7
-bindsym Mod1+8 workspace number $ws8
-bindsym Mod1+9 workspace number $ws9
-bindsym Mod1+0 workspace number $ws10
-
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -158,7 +143,8 @@ bindsym $mod+Right resize grow width 10 px or 10 ppt
 
 exec_always nitrogen --restore &
 exec --no-startup-id picom -b
-exec --no-startup-id sxhkd
+# exec_always --no-startup-id kmonad ~/.config/kmonad/config.kbd
+# exec --no-startup-id sxhkd
 # exec --no-startup-id i3-msg "workspace 9;"
 # exec "/opt/Qv2ray-v2.7.0-linux-x64.AppImage; i3-msg workspace 1"
 # exec --no-startup-id i3-msg "workspace 1;"
@@ -169,7 +155,8 @@ for_window [title="*"] border none
 for_window [class=".*"] border pixel 4
 client.focused            #FFFF00 #FFFF00 #FFFF00 #FFFF00 
 
-bindsym $mod+space floating toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
 bindsym $mod+period exec "rofimoji"
 
 exec_always  --no-startup-id python ~/.config/i3/i3-alternating-layout/alternating_layouts.py
@@ -209,23 +196,34 @@ bindsym Mod1+Shift+Tab workspace prev
 # for_window [title="lf" class="kitty"] floating enable, resize set 800px 600px, move position centerm; move scratchpad
 bindsym Mod1+e [title="lf" class="kitty"] scratchpad show
 bindsym $mod+e exec kitty -e lf
-for_window [title="lf" class="kitty"] floating enable
-for_window [title="lf" class="kitty"] resize set 800px 600px
-for_window [title="lf" class="kitty"] move scratchpad
-for_window [title="lf" class="kitty"] border pixel 5
+for_window [title="^lf$" class="kitty"] floating enable
+for_window [title="^lf$" class="kitty"] resize set 800px 600px
+for_window [title="^lf$" class="kitty"] move position center
+for_window [title="^lf$" class="kitty"] move scratchpad
+for_window [title="^lf$" class="kitty"] border pixel 5
 
-
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
 # bindsym Mod1+e [instance="file-manager"] scratchpad show; 
 # [instance="file-manager"] move position center
 
 # Show or hide the scratchpad window with the title "lf" and class "kitty"
 # bindsym $mod+e [title="lf" class="kitty"] scratchpad show
 
+focus_on_window_activation none
+
+# start a terminal in workspace 9
+# assign [class="(?i)kitty"] 9
+# exec --no-startup-id kitty -e '/usr/bin/bash -c "cd /home/srinath/.config/kmonad && /usr/bin/kmonad config.kbd; /usr/bin/bash"'
+# exec_always --no-startup-id i3-msg 'workspace 1; exec kitty -e echo "hi"'
+exec_always --no-startup-id i3-msg 'workspace 9;'
+exec_always --no-startup-id kitty -e sh -c "cd /home/srinath/.config/kmonad && /usr/bin/kmonad config.kbd; exec sh"
+
 
 # Bind a keyboard shortcut to show/hide the LibreWolf scratchpad window
 exec --no-startup-id export PDF_VIEWER=zathura
 exec --no-startup-id wal -R 
-assign [class="librewolf-default"] 1
+# assign [class="librewolf-default"] 1
 set $debug_mode 1
 
 
